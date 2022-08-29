@@ -1,0 +1,90 @@
+@charset "utf-8";
+/* #map{justify-content: center; } */
+
+/* 背景画像の設定 */
+body {
+    background-image: url(image/BG.png);
+    margin: 0;
+}
+
+/* 文字色等の設定 */
+p {
+    margin: 7.5px;
+    color: white;
+    text-align: center;
+}
+
+form {
+    color: white;
+    clear: both;
+}
+
+/* ステージ表示用 */
+table {
+    margin: 0 auto;
+}
+
+#map {
+    border-collapse: collapse;
+    clear: both;
+}
+
+td {
+    padding: 0;
+    height: 32px;
+    width: 32px;
+    line-height: 0;
+}
+
+/* プレイヤーキャラ */
+#player {
+    position: absolute;
+    float: left;
+}
+
+/* スコアボードの表示場所 */
+input {
+    height: 17px;
+}
+
+/* 残りの設置場所の表示 */
+#Pleft {
+    width: 32px
+}
+
+/* クリアタイムの表示 */
+#timer {
+    width: 98px
+}
+
+
+/* ここからカスタムステージ専用 */
+
+/*「ステージの要素」の表 */
+.explain {
+    width: auto;
+    height: 24px;
+}
+
+/* カスタムステージの入力欄 */
+textarea {
+    width: 700px;
+    height: 300px;
+}
+
+/* 「プレイする」ボタン */
+#play {
+    height: 24px;
+}
+
+a {
+    text-decoration: none;
+    background-color: rgb(172, 156, 133);
+    border-radius: 5px;
+    padding: 0 5px;
+    color: white;
+}
+
+a:hover {
+    background-color: rgb(92, 83, 60);
+}

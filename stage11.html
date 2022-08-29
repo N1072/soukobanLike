@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    	<meta charset="utf-8">
+    	<title>倉庫番のようなもの</title>
+        <script src="jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+        <!-- ステージデータ
+        "　"＝空間
+        "人"＝プレイヤー
+        "壁"＝壁・床
+        "￣"＝壁・床(箱だけすり抜ける)
+        "✕"＝設置場所
+        "箱"＝箱
+        "Ｈ"＝はしご 
+        "／"＝レバー
+        "赤"＝スイッチ壁(赤)
+        "青"＝スイッチ壁(青) -->
+
+
+        <script>      
+            var map = new Array();
+            map.push("壁壁壁　　　　　　")
+            map.push("　　　箱　壁壁壁Ｈ")
+            map.push("Ｈ壁￣壁Ｈ壁　　Ｈ")
+            map.push("Ｈ　　　Ｈ✕　　Ｈ")
+            map.push("壁壁壁壁Ｈ壁　　Ｈ")
+            map.push("　　　　Ｈ壁　　Ｈ")
+            map.push("　　　　Ｈ壁　　Ｈ")
+            map.push("人　箱　Ｈ壁　箱Ｈ")
+            map.push("壁壁壁✕壁壁壁壁✕")
+        </script>
+        <script src="gamedata.js"></script>
+    </body>
+</html>

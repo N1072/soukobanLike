@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+    	<meta charset="utf-8">
+    	<title>カスタムステージ</title>
+        <script src="jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="image/favicon.ico">
+    </head>
+
+    <body>
+        <!-- ステージデータ
+        "　"＝空間
+        "人"＝プレイヤー
+        "壁"＝壁・床
+        "￣"＝壁・床(箱だけすり抜ける)
+        "✕"＝設置場所
+        "箱"＝箱
+        "Ｈ"＝はしご 
+        "／"＝レバー
+        "赤"＝スイッチ壁(赤)
+        "青"＝スイッチ壁(青) -->
+
+
+        <script>      
+            function start(){
+                var val,i,j;
+                //入力データを読み込む
+                val=document.getElementById('editmap').value;
+                //入力データを改行で区切ってマップデータにする
+                map=val.split('\n');
+
+
+                var obj = new Object;//マップチップと画像名を結びつける連想配列
+                obj["　"]="floor";
+                obj["・"]="floor";
+                obj["人"]="floor";
+                obj["壁"]="wall";
+                obj["￣"]="wall_thought";
+                obj["✕"]="floorput";
+                obj["×"]="floorput";
+                obj["箱"]="box";
+                obj["Ｈ"]="ladder";
+                obj["／"]="switchred";
+                obj["赤"]="redwall";
+                obj["青"]="bluefloor";
+
+                var error=0 //エラーが出たかどうか
+
+                //エラーを探す
+                var player=0 //プレイヤーの数
+                var put=0 //設置場所の数
+                for (i=0;i<map.length;i++){
+                    if(map[i].length!=map[0].length && error==0){error=4}//エラー(マップ幅が統一されてない)
+                    for(j=0;j<map[i].length;j++){
+                        if (typeof obj[map[i].charAt(j)] == "undefined" && error==0){error=5}//エラー(マップチップ以外の文字が入っている)
+                        if(map[i].charAt(j)=="人")player++;
+                        if(obj[map[i].charAt(j)]=="floorput")put++;
+                        //if(map[i].charAt(j)=="×")put++;
+                    };
+                    console.log(map[i]);
+                }
+                if(player==0 && error==0){error=2};//エラー(プレイヤーがいない)
+                if(player>1 && error==0){error=3};//エラー(プレイヤーが多い)
+                if(put==0 && error==0){error=1};//エラー(設置場所がない)
+
+
+                if(error==0){
+                    //ボタンやエディタを消す
+                    document.getElementById("edit").style.display = 'none';
+                    //ゲームの実行
+                    begin()                
+                } else if(error==1){
+                    //エラー表示(設置場所がない)
+                    alert("設置場所が一つもありません")
+                } else if(error==2){
+                    //エラー表示(プレイヤーがいない)
+                    alert("プレイヤーキャラがいません")
+                } else if(error==3){
+                    //エラー表示(プレイヤーが多い)
+                    alert("プレイヤーキャラが二人以上います")
+                } else if(error==4){
+                    //エラー表示(マップ幅が統一されてない)
+                    alert("マップの横幅が統一されていません\n一見統一されているのにこのエラーが出る場合、\n余計な改行やスペースがある可能性があります")
+                } else if(error==5){
+                    //エラー表示(マップチップ以外の文字が入っている)
+                    alert(`実装されているマップチップ以外の文字が入っています\n一見同じ文字でも、違う文字と判定されている可能性があるので、\n「ステージの要素」の表からコピーして入力することをお勧めします\n「ステージの要素」の表からコピーする際、"の部分は含めないでください。`)
+                }
+                
+            }
+            var map = new Array();
+        </script>
+        <script src="gamedata.js"></script>
+        <form id="edit">
+            <p>下の「ステージの要素」の表の左側の文字をコピー＆ペーストして、</p>
+            <p>並べることでステージを作れます。</p>
+            <p>※ " ←はコピーしないでください</p>
+            <p>　</p>
+            <p>ステージの要素</p>
+            <table border="1">
+                <tr>
+                    <th  class="explain">文字</th>
+                    <th  class="explain">オブジェクト</th>
+                </tr>
+                
+                <tr>
+                    <td  class="explain">・</td>
+                    <td  class="explain">空間</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">人</td>
+                    <td  class="explain">プレイヤー</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">壁</td>
+                    <td  class="explain">壁・床</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">￣</td>
+                    <td  class="explain">壁・床(箱だけすり抜ける)</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">✕</td>
+                    <td  class="explain">設置場所</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">箱</td>
+                    <td  class="explain">箱</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">Ｈ</td>
+                    <td  class="explain">はしご</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">／</td>
+                    <td  class="explain">レバー</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">赤</td>
+                    <td  class="explain">スイッチ壁(赤)</td>
+                </tr>
+
+                <tr>
+                    <td  class="explain">青</td>
+                    <td  class="explain">スイッチ壁(青)</td>
+                </tr>
+
+            </table>
+            <p>セーブ機能はないので、作ったステージのデータはCtrl+Cでコピーしておいてください。</p>
+            <p><textarea name="editmap" id="editmap"></textarea></p>
+            <p><input type="button" id="play" onclick="start()" value="プレイする"></p>
+            <p><a href="stage14.html" id="back">ステージセレクトへ戻る</a></p>
+        </form>
+    </body>
+</html>
