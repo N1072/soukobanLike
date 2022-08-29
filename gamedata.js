@@ -416,7 +416,7 @@
 
     
     //ページ名からステージ番号をとる
-    for(i=location.href.indexOf( "game0/stage", 0 )+11;location.href.charAt(i)!=".";i++){
+    for(i=location.href.indexOf( "/stage", 0 )+11;location.href.charAt(i)!=".";i++){
         if(location.href.charAt(i)=="c"){stagenum=-1;break};//カスタムステージならステージ番号を-1にする
         stagenum*=10;
         stagenum+=Number(location.href.charAt(i));
